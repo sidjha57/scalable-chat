@@ -1,16 +1,29 @@
 import { Server } from "socket.io";
 
 class SocketService {
-    private _io: Server;
+	private _io: Server;
 
-    constructor() {
-        console.log("Init Socket Service...");
-        this._io = new Server();
-    }
+	constructor() {
+		console.log("Init Socket Service...");
+		this._io = new Server();
+	}
 
-    get io() {
-        return this._io;
-    }
+	public initListeners() {
+		console.log("Init Socket Listeners...");
+        
+		const io = this.io;
+		io.on("connect", (socket) => {
+			console.log(`New Socket Connected`, socket.id);
+
+			socket.on("event:message", async ({ message }: { message: string }) => {
+				console.log("New message Rec", message);
+			});
+		});
+	}
+
+	get io() {
+		return this._io;
+	}
 }
 
 export default SocketService;
