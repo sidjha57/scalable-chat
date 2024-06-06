@@ -4,7 +4,8 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": ["REDIS_CONNECTION_STRING", "REDIS_CHAT_CHANNEL"]
     },
     "lint": {
       "dependsOn": ["^lint"]

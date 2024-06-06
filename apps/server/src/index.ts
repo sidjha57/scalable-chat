@@ -14,6 +14,7 @@ async function init() {
     );
 
     socketService.initListeners();
+
 }
 
 init();
