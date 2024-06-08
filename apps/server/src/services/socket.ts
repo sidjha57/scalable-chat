@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 import { pub, sub } from "./redisClient";
 import prismaClient from "./prisma";
+import { produceMessage } from "./kakfa";
 
 class SocketService {
 	private _io: Server;
@@ -41,11 +42,8 @@ class SocketService {
 				io.emit("message", message);
 				console.log("Message emitted to server");
 
-				await prismaClient.message.create({
-					data: {
-						text: message
-					}
-				})
+				await produceMessage(message);
+				console.log("Message Produced to Kafka Broker");
 			}
 		});
 	}
