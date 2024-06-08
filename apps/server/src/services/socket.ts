@@ -1,5 +1,6 @@
 import { Server } from "socket.io";
 import { pub, sub } from "./redisClient";
+import prismaClient from "./prisma";
 
 class SocketService {
 	private _io: Server;
@@ -34,11 +35,17 @@ class SocketService {
 			});
 		});
 
-		sub.on("message", (channel, message) => {
+		sub.on("message", async (channel, message) => {
 			if (channel === (process.env.REDIS_CHAT_CHANNEL as string || "MESSAGES")) {
 				console.log("new message from redis", message);
 				io.emit("message", message);
 				console.log("Message emitted to server");
+
+				await prismaClient.message.create({
+					data: {
+						text: message
+					}
+				})
 			}
 		});
 	}
