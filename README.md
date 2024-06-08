@@ -1,3 +1,9 @@
+# Project Overview
+
+A simple application with scalable chat app design, leverages PUB/SUB model to make the websockets scalable.
+
+For starting the project follow the instructions below.
+
 # Turborepo starter
 
 This is an official starter Turborepo.
@@ -38,7 +44,7 @@ To build all apps and packages, run the following command:
 
 ```
 cd my-turborepo
-pnpm build
+yarn build
 ```
 
 ### Develop
@@ -47,7 +53,7 @@ To develop all apps and packages, run the following command:
 
 ```
 cd my-turborepo
-pnpm dev
+yarn dev
 ```
 
 ### Remote Caching
