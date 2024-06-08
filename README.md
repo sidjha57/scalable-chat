@@ -9,7 +9,8 @@
 
 ## Architecture
 
-<img width="905" alt="image" src="https://github.com/sidjha57/scalable-chat/assets/62923020/58273c9e-498e-4d77-a535-7eb7d6179048">
+<img width="813" alt="image" src="https://github.com/sidjha57/scalable-chat/assets/62923020/9ea5dd2f-7917-4bd6-8d9b-974418452e30">
+
 
 The system architecture consists of the following components:
 
