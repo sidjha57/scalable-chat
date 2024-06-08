@@ -5,11 +5,12 @@
 
 ## Overview
 
-This project is designed to demonstrate a scalable real-time messaging system using Socket.io and Redis. The system architecture utilizes a publish/subscribe (Pub/Sub) model to distribute messages across multiple servers. This setup ensures that messages are efficiently broadcasted to all connected clients, regardless of which server they are connected to.
+> This project is designed to demonstrate a scalable real-time messaging system using Socket.io, Redis and additional integration with Apache Kafka and PostgreSQL for enhanced data processing and storage. The system architecture utilizes a publish/subscribe (Pub/Sub) model to distribute messages across multiple servers. This setup ensures that messages are efficiently broadcasted to all connected clients, regardless of which server they are connected to.
 
 ## Architecture
 
-<img width="905" alt="image" src="https://github.com/sidjha57/scalable-chat/assets/62923020/58273c9e-498e-4d77-a535-7eb7d6179048">
+<img width="813" alt="image" src="https://github.com/sidjha57/scalable-chat/assets/62923020/9ea5dd2f-7917-4bd6-8d9b-974418452e30">
+
 
 The system architecture consists of the following components:
 
@@ -17,6 +18,9 @@ The system architecture consists of the following components:
 - **Redis Insig**: Using for verifying messages during development (Can be skipped)
 - **Server 1 & Server 2 (Socket.io)**: These are the Socket.io servers that manage client connections. They subscribe to the Redis channel and broadcast messages to connected clients.
 - **Clients (u1, u2, u3, u4)**: Represent users connected to the servers. Each client subscribes to the message event and receives the broadcasted messages.
+- **Kafka (Aiven)**: Apache Kafka is used for message queuing and streaming. Messages from the servers are published to Kafka for further processing.
+- **Node.js Consumer**: A consumer service implemented in Node.js subscribes to Kafka topics to process and consume messages.
+- **PostgreSQL (Aiven)**: A relational database for persistent storage. The consumer writes processed messages to PostgreSQL for long-term storage and analysis.
 
 ### Message Flow
 
@@ -24,17 +28,30 @@ The system architecture consists of the following components:
 2. **Redis Distribution**: Redis (Aiven) publishes the message to all subscribed servers.
 3. **Server Handling**: Each server (ex. Server 1 and Server 2) receives the message from Redis and broadcasts it to its connected clients.
 4. **Client Reception**: Each client (ex. u1, u2, u3, u4) connected to the servers receives the broadcasted message.
+5. **Kafka Integration**: Messages from the servers are also sent to Kafka for streaming and queuing.
+6. **Node.js Consumer**: This service consumes messages from Kafka and processes them as needed.
+7. **Database Storage**: The processed messages are written to PostgreSQL for persistent storage.
 
 ## Features
 
 - **Real-time Communication**: The system supports real-time messaging using WebSockets, ensuring low latency.
-- **Scalability**: By leveraging Redis Pub/Sub and multiple Socket.io servers, the system can scale horizontally to handle a large number of clients.
+- **Scalability**: By leveraging Redis Pub/Sub and multiple Socket.io servers, the system can scale horizontally to handle a large number of clients. Utilizes Kafka to ingest and handle large-scale messaging efficiently.
 - **Distributed Architecture**: The use of Redis for message brokering allows for distributing the load across multiple servers seamlessly.
+- **Persistent Storage**: Employs PostgreSQL for long-term storage and retrieval of messages.
 
+---
 
-For starting the project follow the instructions below.
+# Getting Started
 
-# Turborepo starter
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v14 or later)
+- [Redis](https://redis.io/)
+- [Apache Kafka](https://kafka.apache.org/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Aiven Account](https://aiven.io/) (for cloud-based services, if applicable)
+
+## Turborepo starter
 
 This is an official starter Turborepo.
 
