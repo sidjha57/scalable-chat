@@ -5,7 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
-      "env": ["REDIS_CONNECTION_STRING", "REDIS_CHAT_CHANNEL"]
+      "env": ["REDIS_CONNECTION_STRING", "REDIS_CHAT_CHANNEL", "PORT"]
     },
     "lint": {
       "dependsOn": ["^lint"]
